@@ -1,3 +1,2 @@
-import importlib
-sys = importlib.import_module('sys')
-print(sys.path)
+import utils as u
+print(u.__version)
