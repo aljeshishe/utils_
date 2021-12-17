@@ -1,21 +1,31 @@
 import pandas as pd
 from datetime import datetime
 import json
-import requests
 from pathlib import Path
-import dtale
+import common
 
-
+print('imported')
+VERSIONS = {'dtale': '==1.61.1'}
 def reorder_columns(self, *columns):
     # remove columns and add them from the begining
     new_columns = list(columns) + [item for item in self.columns if item not in columns]
     return self[new_columns]
 
+def d(df, count=5, dtale=False):
+    dtale_ = common.install_import('dtale', VERSIONS['dtale'])
+    if dtale:
+        dtale_.show(df).open_browser()
+    else:
+        print(f'{len(df)} rows')
+        display(df.head(count))
 
-pd.core.frame.DataFrame.reorder_columns = reorder_columns
+
+def patch():
+    pd.core.frame.DataFrame.reorder_columns = reorder_columns
 
 
-def download(url):
+def download(url, headers={}):
+    import requests
     print(url)
     response = requests.get(url, headers=headers)
     response.raise_for_status()
@@ -35,15 +45,6 @@ def save(data, prefix=''):
 def load(filename):
     with Path(filename).open('r', encoding='utf-8') as fp:
         return json.load(fp=fp)
-
-
-def d(df, count=5):
-    print(f'{len(df)} rows')
-    display(df.head(count))
-
-
-def dshow(df):
-    dtale.show(df).open_browser()
 
 
 def query(loans, keys):
