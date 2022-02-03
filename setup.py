@@ -40,7 +40,7 @@ setup(
     classifiers=[
     ],
     keywords='utils',
-    packages=find_packages(exclude=['utils']),
+    packages=['utils'],
     install_requires=requirements,
     # extras_require={
     #     's3': [
