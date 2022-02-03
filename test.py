@@ -1,2 +1,2 @@
 import utils as u
-print(u.__version)
+print(u.__version__)

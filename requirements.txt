@@ -1,3 +1,4 @@
 requests==2.25.1
 selenium-wire
 # python-gnupg==0.4.7
+pandas==1.4.0
